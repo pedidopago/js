@@ -2,6 +2,7 @@ import util from '../util';
 import { APIEvents } from './api_events';
 import { APIOrder } from './api_order';
 import { APIOrders } from './api_orders';
+import { APITransaction } from './api_transactions';
 
 export class APIBase {
   // static fields
@@ -36,6 +37,7 @@ export class APIBase {
   public order: APIOrder;
   public orders: APIOrders;
   public events: APIEvents;
+  public transactions: APITransaction;
 
   private mBaseURL: string;
   private isAgent: boolean = true;
@@ -58,6 +60,7 @@ export class APIBase {
     this.order = new APIOrder(this);
     this.orders = new APIOrders(this);
     this.events = new APIEvents(this);
+    this.transactions = new APITransaction(this);
   }
   public localStorageJWTKey(): string {
     if (this.isAgent) {

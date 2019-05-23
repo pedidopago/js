@@ -1,6 +1,6 @@
 {
   "name": "@pedidopago/api",
-  "version": "0.1.36",
+  "version": "0.1.39",
   "description": "Pedido Pago Client API (api.pedidopago.com.br)",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -10,8 +10,12 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json"
   },
-  "author": "Gabriel Ochsenhofer",
+  "author": "Pedido Pago Internet LTDA",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pedidopago/js"
+  },
   "devDependencies": {
     "@types/jest": "^24.0.11",
     "jest": "^24.7.1",
