@@ -12,7 +12,7 @@ export default {
   },
   client: (baseurl: string = '', jwt: string = '') => {
     if (jwt === '') {
-      return ClientAPI.newFromCookie(baseurl, ClientAPI.getCookieNameFromEnv('cl_'), '/v1/cl1',false);
+      return ClientAPI.newFromCookie(baseurl, ClientAPI.getCookieNameFromEnv('cl_'), '/v1/cli',false);
     }
 
     return new ClientAPI(baseurl, jwt);
