@@ -27,9 +27,9 @@ export class APIBase {
     return prefix + 'api_jwt_' + domainID;
   }
 
-  public static newFromCookie(baseurl: string = '', cookiename: string = '') {
+  public static newFromCookie(baseurl: string = '', cookiename: string = '', urlPrefix: string = '/v1/agt', isAgent:boolean = true ) {
     const jwt = util.getCookie(cookiename);
-    return new APIBase(baseurl, jwt);
+    return new APIBase(baseurl, jwt,urlPrefix,isAgent);
   }
 
   // fields

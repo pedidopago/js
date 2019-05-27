@@ -5,14 +5,14 @@ import { API as DomainAPI } from './api_domain/index';
 export default {
   agent: (baseurl: string = '', jwt: string = '') => {
     if (jwt === '') {
-      return AgentAPI.newFromCookie(baseurl, AgentAPI.getCookieNameFromEnv());
+      return AgentAPI.newFromCookie(baseurl, AgentAPI.getCookieNameFromEnv(), '/v1/agt', true);
     }
 
     return new AgentAPI(baseurl, jwt);
   },
   client: (baseurl: string = '', jwt: string = '') => {
     if (jwt === '') {
-      return ClientAPI.newFromCookie(baseurl, ClientAPI.getCookieNameFromEnv('cl_'));
+      return ClientAPI.newFromCookie(baseurl, ClientAPI.getCookieNameFromEnv('cl_'), '/v1/cl1',false);
     }
 
     return new ClientAPI(baseurl, jwt);
