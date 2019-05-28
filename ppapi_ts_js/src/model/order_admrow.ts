@@ -16,6 +16,9 @@ export interface OrderAdmrow {
   user_document: string;
   user_document_type?: number;
   date_nf_printed?: string;
+  date_client_access?: string;
+  next_call?: string;
+  calls?: number;
   calculated_agent_id?: number;
   calculated_agent_name?: string;
   coach_agent_id?: number;
