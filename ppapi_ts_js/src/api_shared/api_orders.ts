@@ -65,14 +65,14 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoach(page?: number | string, sort_by?: SortBy, search?: Search) {
+  public getLatestCoach(page?: number | string, sortBy?: SortBy, search?: Search) {
     let uri = `/orders/latest?selfcoach=1`;
     if (page && page > 0) {
       uri = `/orders/latest?selfcoach=1&p=${page}`;
     }
 
-    if (sort_by) {
-      uri = uri + `&s=${sort_by.key}&a=${sort_by.asc? 1:0}`
+    if (sortBy) {
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc? 1:0}`
     }
 
     if (search) {
