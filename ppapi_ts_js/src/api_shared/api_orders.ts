@@ -11,6 +11,18 @@ export interface GetLatestResp {
   total: number;
   page: number;
   max_results_per_page: number;
+  sort_by: SortBy;
+  search: Search;
+}
+
+export interface SortBy {
+  key: string;
+  asc: boolean;
+}
+
+export interface Search {
+  col: string;
+  val: string;
 }
 
 /*
@@ -53,11 +65,20 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoach(page?: number | string) {
+  public getLatestCoach(page?: number | string, sort_by?: SortBy, search?: Search) {
     let uri = `/orders/latest?selfcoach=1`;
     if (page && page > 0) {
       uri = `/orders/latest?selfcoach=1&p=${page}`;
     }
+
+    if (sort_by) {
+      uri = uri + `&s=${sort_by.key}&a=${sort_by.asc? 1:0}`
+    }
+
+    if (search) {
+      uri = uri + `&ctx=${search.col}&q=${search.val? 1:0}`
+    }
+    
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
       this.getJSON(uri)
         .catch(error => {
@@ -68,9 +89,19 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoachFavorites() {
+  public getLatestCoachFavorites(sort_by?: SortBy, search?: Search) {
+    let uri = `/orders/latest?selfcoach=1&favorites=1`;
+
+    if (sort_by) {
+      uri = uri + `&s=${sort_by.key}&a=${sort_by.asc? 1:0}`
+    }
+
+    if (search) {
+      uri = uri + `&ctx=${search.col}&q=${search.val? 1:0}`
+    }
+
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
-      this.getJSON(`/orders/latest?selfcoach=1&favorites=1`)
+      this.getJSON(uri)
         .catch(error => {
           resolve(APIBaseChild.parseError<GetLatestResp>(error));
         })
