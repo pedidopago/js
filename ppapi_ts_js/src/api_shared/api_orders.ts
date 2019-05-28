@@ -78,7 +78,7 @@ export class APIOrders extends APIBaseChild {
     if (search) {
       uri = uri + `&ctx=${search.col}&q=${search.val? 1:0}`
     }
-    
+
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
       this.getJSON(uri)
         .catch(error => {
@@ -89,11 +89,11 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoachFavorites(sort_by?: SortBy, search?: Search) {
+  public getLatestCoachFavorites(sortBy?: SortBy, search?: Search) {
     let uri = `/orders/latest?selfcoach=1&favorites=1`;
 
-    if (sort_by) {
-      uri = uri + `&s=${sort_by.key}&a=${sort_by.asc? 1:0}`
+    if (sortBy) {
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc? 1:0}`
     }
 
     if (search) {
