@@ -50,11 +50,15 @@ export class APIOrders extends APIBaseChild {
   constructor(parent: APIBase) {
     super(parent);
   }
-  public getLatest(page?: number | string) {
+  public getLatest(page?: number | string, sortBy?: SortBy) {
     let uri = `/orders/latest`;
     if (page && page > 0) {
       uri = `/orders/latest?p=${page}`;
     }
+    if (sortBy) {
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 1 : 0}`;
+    }
+    
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
       this.getJSON(uri)
         .catch(error => {
@@ -72,11 +76,11 @@ export class APIOrders extends APIBaseChild {
     }
 
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc? 1:0}`
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 1 : 0}`;
     }
 
     if (search) {
-      uri = uri + `&ctx=${search.col}&q=${search.val? 1:0}`
+      uri = uri + `&ctx=${search.col}&q=${search.val ? 1 : 0}`;
     }
 
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
@@ -93,11 +97,11 @@ export class APIOrders extends APIBaseChild {
     let uri = `/orders/latest?selfcoach=1&favorites=1`;
 
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc? 1:0}`
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 1 : 0}`;
     }
 
     if (search) {
-      uri = uri + `&ctx=${search.col}&q=${search.val? 1:0}`
+      uri = uri + `&ctx=${search.col}&q=${search.val ? 1 : 0}`;
     }
 
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
@@ -166,11 +170,16 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoachAgentOrders(agentID: number, page?: number | string) {
-    let uri = `/orders/coach/last/${agentID}`;
+  public getLatestCoachAgentOrders(agentID: number, page?: number | string, sortBy?: SortBy) {
+    let uri = `/orders/coach/last/${agentID}?`;
     if (page && page > 0) {
-      uri = `/orders/coach/last/${agentID}?p=${page}`;
+      uri = uri +`p=${page}`;
     }
+    
+    if (sortBy) {
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 1 : 0}`;
+    }
+
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
       this.getJSON(uri)
         .catch(error => {
