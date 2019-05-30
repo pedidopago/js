@@ -1,6 +1,6 @@
 {
   "name": "@pedidopago/api",
-  "version": "0.1.52",
+  "version": "0.1.53",
   "description": "Pedido Pago Client API (api.pedidopago.com.br)",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
