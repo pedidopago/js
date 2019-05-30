@@ -175,7 +175,7 @@ export class APIOrders extends APIBaseChild {
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
     }
-    if (sortBy && uri.indexOf('p') > -1) {
+    if (sortBy) {
       uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
     }
 
