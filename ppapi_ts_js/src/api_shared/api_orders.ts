@@ -56,7 +56,7 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `?p=${page}`;
     }
     if (sortBy && uri.indexOf('p') > -1) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 0 : 1}`;
     }
 
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
@@ -76,11 +76,11 @@ export class APIOrders extends APIBaseChild {
     }
 
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 0 : 1}`;
     }
 
     if (search) {
-      uri = uri + `&ctx=${search.col}&q=${search.val ? 1 : 0}`;
+      uri = uri + `&ctx=${search.col}&q=${search.val}`;
     }
 
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
@@ -176,7 +176,7 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `p=${page}`;
     }
     if (sortBy && uri.indexOf('p') > -1) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 0 : 1}`;
     }
     if (sortBy && uri.indexOf('p') < -1) {
       uri = uri + `s=${sortBy.key}&a=${sortBy.asc ? 1 : 0}`;
