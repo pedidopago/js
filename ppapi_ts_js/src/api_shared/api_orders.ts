@@ -56,7 +56,7 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `?p=${page}`;
     }
     if (sortBy && uri.indexOf('p') > -1) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 0 : 1}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 1 : 0}`;
     }
 
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
@@ -76,7 +76,7 @@ export class APIOrders extends APIBaseChild {
     }
 
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 0 : 1}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 1 : 0}`;
     }
 
     if (search) {
@@ -176,11 +176,9 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `p=${page}`;
     }
     if (sortBy && uri.indexOf('p') > -1) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 0 : 1}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc ? 1 : 0}`;
     }
-    if (sortBy && uri.indexOf('p') < -1) {
-      uri = uri + `s=${sortBy.key}&a=${sortBy.asc ? 1 : 0}`;
-    }
+  
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
       this.getJSON(uri)
         .catch(error => {
