@@ -50,13 +50,17 @@ export class APIOrders extends APIBaseChild {
   constructor(parent: APIBase) {
     super(parent);
   }
-  public getLatest(page?: number | string, sortBy?: SortBy) {
+  public getLatest(page?: number | string, sortBy?: SortBy, search?: Search) {
     let uri = `/orders/latest`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
     }
     if (sortBy && uri.indexOf('p') > -1) {
       uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+    }
+
+    if (search) {
+      uri = uri + `&ctx=${search.col}&q=${search.val}`;
     }
 
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
@@ -101,7 +105,7 @@ export class APIOrders extends APIBaseChild {
     }
 
     if (search) {
-      uri = uri + `&ctx=${search.col}&q=${search.val ? 1 : 0}`;
+      uri = uri + `&ctx=${search.col}&q=${search.val}`;
     }
 
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
@@ -170,13 +174,17 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoachAgentOrders(agentID: number, page?: number | string, sortBy?: SortBy) {
+  public getLatestCoachAgentOrders(agentID: number, page?: number | string, sortBy?: SortBy, search?: Search) {
     let uri = `/orders/coach/last/${agentID}`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
     }
     if (sortBy) {
       uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+    }
+
+    if (search) {
+      uri = uri + `&ctx=${search.col}&q=${search.val}`;
     }
 
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
