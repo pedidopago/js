@@ -258,7 +258,13 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoachAgentOrders(agentID: number, page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
+  public getLatestCoachAgentOrders(
+    agentID: number,
+    page?: number | string,
+    sortBy?: SortBy,
+    search?: Search,
+    filters?: Filters,
+  ) {
     let uri = `/orders/coach/last/${agentID}`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;

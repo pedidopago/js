@@ -8,14 +8,14 @@ export interface RefundInput {
   reason: string;
   cancel_order: boolean;
   amount: number;
-  bank_code: string;
-  agencia: string;
-  agencia_dv: string;
-  conta: string;
-  conta_dv: string;
-  document_number: string;
-  legal_name: string;
-  type: string; // conta_corrente conta_poupanca conta_corrente_conjunta conta_poupanca_conjunta
+  bank_code?: string;
+  agencia?: string;
+  agencia_dv?: string;
+  conta?: string;
+  conta_dv?: string;
+  document_number?: string;
+  legal_name?: string;
+  type?: string; // conta_corrente conta_poupanca conta_corrente_conjunta conta_poupanca_conjunta
 }
 
 export interface RefundResp {
