@@ -25,6 +25,18 @@ export interface Search {
   val: string;
 }
 
+export interface Filters {
+  value:{
+    min:string,
+    max: string
+  },
+  created_date: string,
+  calls: string,
+  recurrent_client: boolean,
+  scheduled_calls: boolean,
+  client_login: boolean
+}
+
 /*
 OrderID   int                `db:"order_id" json:"order_id"`
 	DisplayID string             `db:"display_id" json:"display_id"`
@@ -50,7 +62,7 @@ export class APIOrders extends APIBaseChild {
   constructor(parent: APIBase) {
     super(parent);
   }
-  public getLatest(page?: number | string, sortBy?: SortBy, search?: Search) {
+  public getLatest(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
     let uri = `/orders/latest`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
@@ -63,6 +75,30 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `&ctx=${search.col}&q=${search.val}`;
     }
 
+    if (filters) {
+      if (filters.value.min !== "") {
+        uri = uri + `&min=${filters.value.min}`
+      }
+      if (filters.value.max !== "") {
+        uri = uri + `&max=${filters.value.max}`
+      }
+      if (filters.client_login) {
+        uri = uri + `&client_login=${filters.client_login}`
+      }
+      if (filters.recurrent_client ) {
+        uri = uri + `&recurrent_client=${filters.recurrent_client}`
+      }
+      if (filters.scheduled_calls) {
+        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`
+      }
+      if (filters.calls !== "") {
+        uri = uri + `&calls=${filters.calls}`
+      }
+      if (filters.created_date !== "") {
+        uri = uri + `&calls=${filters.created_date}`
+      }
+    }
+
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
       this.getJSON(uri)
         .catch(error => {
@@ -73,7 +109,7 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoach(page?: number | string, sortBy?: SortBy, search?: Search) {
+  public getLatestCoach(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
     let uri = `/orders/latest?selfcoach=1`;
     if (page && page > 0) {
       uri = `/orders/latest?selfcoach=1&p=${page}`;
@@ -87,6 +123,30 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `&ctx=${search.col}&q=${search.val}`;
     }
 
+    if (filters) {
+      if (filters.value.min !== "") {
+        uri = uri + `&min=${filters.value.min}`
+      }
+      if (filters.value.max !== "") {
+        uri = uri + `&max=${filters.value.max}`
+      }
+      if (filters.client_login) {
+        uri = uri + `&client_login=${filters.client_login}`
+      }
+      if (filters.recurrent_client ) {
+        uri = uri + `&recurrent_client=${filters.recurrent_client}`
+      }
+      if (filters.scheduled_calls) {
+        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`
+      }
+      if (filters.calls !== "") {
+        uri = uri + `&calls=${filters.calls}`
+      }
+      if (filters.created_date !== "") {
+        uri = uri + `&calls=${filters.created_date}`
+      }
+    }
+
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
       this.getJSON(uri)
         .catch(error => {
@@ -97,7 +157,7 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoachFavorites(sortBy?: SortBy, search?: Search) {
+  public getLatestCoachFavorites(sortBy?: SortBy, search?: Search, filters?: Filters ) {
     let uri = `/orders/latest?selfcoach=1&favorites=1`;
 
     if (sortBy) {
@@ -106,6 +166,30 @@ export class APIOrders extends APIBaseChild {
 
     if (search) {
       uri = uri + `&ctx=${search.col}&q=${search.val}`;
+    }
+
+    if (filters) {
+      if (filters.value.min !== "") {
+        uri = uri + `&min=${filters.value.min}`
+      }
+      if (filters.value.max !== "") {
+        uri = uri + `&max=${filters.value.max}`
+      }
+      if (filters.client_login) {
+        uri = uri + `&client_login=${filters.client_login}`
+      }
+      if (filters.recurrent_client ) {
+        uri = uri + `&recurrent_client=${filters.recurrent_client}`
+      }
+      if (filters.scheduled_calls) {
+        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`
+      }
+      if (filters.calls !== "") {
+        uri = uri + `&calls=${filters.calls}`
+      }
+      if (filters.created_date !== "") {
+        uri = uri + `&calls=${filters.created_date}`
+      }
     }
 
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
@@ -174,7 +258,7 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoachAgentOrders(agentID: number, page?: number | string, sortBy?: SortBy, search?: Search) {
+  public getLatestCoachAgentOrders(agentID: number, page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
     let uri = `/orders/coach/last/${agentID}`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
@@ -185,6 +269,30 @@ export class APIOrders extends APIBaseChild {
 
     if (search) {
       uri = uri + `&ctx=${search.col}&q=${search.val}`;
+    }
+
+    if (filters) {
+      if (filters.value.min !== "") {
+        uri = uri + `&min=${filters.value.min}`
+      }
+      if (filters.value.max !== "") {
+        uri = uri + `&max=${filters.value.max}`
+      }
+      if (filters.client_login) {
+        uri = uri + `&client_login=${filters.client_login}`
+      }
+      if (filters.recurrent_client ) {
+        uri = uri + `&recurrent_client=${filters.recurrent_client}`
+      }
+      if (filters.scheduled_calls) {
+        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`
+      }
+      if (filters.calls !== "") {
+        uri = uri + `&calls=${filters.calls}`
+      }
+      if (filters.created_date !== "") {
+        uri = uri + `&calls=${filters.created_date}`
+      }
     }
 
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
