@@ -26,15 +26,15 @@ export interface Search {
 }
 
 export interface Filters {
-  value:{
-    min:string,
-    max: string
-  },
-  created_date: string,
-  calls: string,
-  recurrent_client: boolean,
-  scheduled_calls: boolean,
-  client_login: boolean
+  value: {
+    min: string;
+    max: string;
+  };
+  created_date: string;
+  calls: string;
+  recurrent_client: boolean;
+  scheduled_calls: boolean;
+  client_login: boolean;
 }
 
 /*
@@ -76,26 +76,26 @@ export class APIOrders extends APIBaseChild {
     }
 
     if (filters) {
-      if (filters.value.min !== "") {
-        uri = uri + `&min=${filters.value.min}`
+      if (filters.value.min !== '') {
+        uri = uri + `&min=${filters.value.min}`;
       }
-      if (filters.value.max !== "") {
-        uri = uri + `&max=${filters.value.max}`
+      if (filters.value.max !== '') {
+        uri = uri + `&max=${filters.value.max}`;
       }
       if (filters.client_login) {
-        uri = uri + `&client_login=${filters.client_login}`
+        uri = uri + `&client_login=${filters.client_login}`;
       }
-      if (filters.recurrent_client ) {
-        uri = uri + `&recurrent_client=${filters.recurrent_client}`
+      if (filters.recurrent_client) {
+        uri = uri + `&recurrent_client=${filters.recurrent_client}`;
       }
       if (filters.scheduled_calls) {
-        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`
+        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`;
       }
-      if (filters.calls !== "") {
-        uri = uri + `&calls=${filters.calls}`
+      if (filters.calls !== '') {
+        uri = uri + `&calls=${filters.calls}`;
       }
-      if (filters.created_date !== "") {
-        uri = uri + `&calls=${filters.created_date}`
+      if (filters.created_date !== '') {
+        uri = uri + `&created_date=${filters.created_date}`;
       }
     }
 
@@ -124,26 +124,26 @@ export class APIOrders extends APIBaseChild {
     }
 
     if (filters) {
-      if (filters.value.min !== "") {
-        uri = uri + `&min=${filters.value.min}`
+      if (filters.value.min !== '') {
+        uri = uri + `&min=${filters.value.min}`;
       }
-      if (filters.value.max !== "") {
-        uri = uri + `&max=${filters.value.max}`
+      if (filters.value.max !== '') {
+        uri = uri + `&max=${filters.value.max}`;
       }
       if (filters.client_login) {
-        uri = uri + `&client_login=${filters.client_login}`
+        uri = uri + `&client_login=${filters.client_login}`;
       }
-      if (filters.recurrent_client ) {
-        uri = uri + `&recurrent_client=${filters.recurrent_client}`
+      if (filters.recurrent_client) {
+        uri = uri + `&recurrent_client=${filters.recurrent_client}`;
       }
       if (filters.scheduled_calls) {
-        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`
+        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`;
       }
-      if (filters.calls !== "") {
-        uri = uri + `&calls=${filters.calls}`
+      if (filters.calls !== '') {
+        uri = uri + `&calls=${filters.calls}`;
       }
-      if (filters.created_date !== "") {
-        uri = uri + `&calls=${filters.created_date}`
+      if (filters.created_date !== '') {
+        uri = uri + `&created_date=${filters.created_date}`;
       }
     }
 
@@ -157,7 +157,7 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoachFavorites(sortBy?: SortBy, search?: Search, filters?: Filters ) {
+  public getLatestCoachFavorites(sortBy?: SortBy, search?: Search, filters?: Filters) {
     let uri = `/orders/latest?selfcoach=1&favorites=1`;
 
     if (sortBy) {
@@ -169,26 +169,26 @@ export class APIOrders extends APIBaseChild {
     }
 
     if (filters) {
-      if (filters.value.min !== "") {
-        uri = uri + `&min=${filters.value.min}`
+      if (filters.value.min !== '') {
+        uri = uri + `&min=${filters.value.min}`;
       }
-      if (filters.value.max !== "") {
-        uri = uri + `&max=${filters.value.max}`
+      if (filters.value.max !== '') {
+        uri = uri + `&max=${filters.value.max}`;
       }
       if (filters.client_login) {
-        uri = uri + `&client_login=${filters.client_login}`
+        uri = uri + `&client_login=${filters.client_login}`;
       }
-      if (filters.recurrent_client ) {
-        uri = uri + `&recurrent_client=${filters.recurrent_client}`
+      if (filters.recurrent_client) {
+        uri = uri + `&recurrent_client=${filters.recurrent_client}`;
       }
       if (filters.scheduled_calls) {
-        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`
+        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`;
       }
-      if (filters.calls !== "") {
-        uri = uri + `&calls=${filters.calls}`
+      if (filters.calls !== '') {
+        uri = uri + `&calls=${filters.calls}`;
       }
-      if (filters.created_date !== "") {
-        uri = uri + `&calls=${filters.created_date}`
+      if (filters.created_date !== '') {
+        uri = uri + `&created_date=${filters.created_date}`;
       }
     }
 
@@ -272,26 +272,26 @@ export class APIOrders extends APIBaseChild {
     }
 
     if (filters) {
-      if (filters.value.min !== "") {
-        uri = uri + `&min=${filters.value.min}`
+      if (filters.value.min !== '') {
+        uri = uri + `&min=${filters.value.min}`;
       }
-      if (filters.value.max !== "") {
-        uri = uri + `&max=${filters.value.max}`
+      if (filters.value.max !== '') {
+        uri = uri + `&max=${filters.value.max}`;
       }
       if (filters.client_login) {
-        uri = uri + `&client_login=${filters.client_login}`
+        uri = uri + `&client_login=${filters.client_login}`;
       }
-      if (filters.recurrent_client ) {
-        uri = uri + `&recurrent_client=${filters.recurrent_client}`
+      if (filters.recurrent_client) {
+        uri = uri + `&recurrent_client=${filters.recurrent_client}`;
       }
       if (filters.scheduled_calls) {
-        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`
+        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`;
       }
-      if (filters.calls !== "") {
-        uri = uri + `&calls=${filters.calls}`
+      if (filters.calls !== '') {
+        uri = uri + `&calls=${filters.calls}`;
       }
-      if (filters.created_date !== "") {
-        uri = uri + `&calls=${filters.created_date}`
+      if (filters.created_date !== '') {
+        uri = uri + `&created_date=${filters.created_date}`;
       }
     }
 
