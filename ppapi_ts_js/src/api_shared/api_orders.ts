@@ -268,7 +268,7 @@ export class APIOrders extends APIBaseChild {
     page?: number | string,
     sortBy?: SortBy,
     search?: Search,
-    filters?: Filters
+    filters?: Filters,
   ) {
     let uri = `/orders/coach/last/${agentID}`;
     if (page && page > 0) {
@@ -318,7 +318,7 @@ export class APIOrders extends APIBaseChild {
   }
 
   public getSelfOrders(agentID: number, page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
-    let uri = `/orders/self?agent_id${agentID}`;
+    let uri = `/orders/self?agent_id=${agentID}`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
     }
