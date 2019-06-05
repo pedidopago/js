@@ -317,8 +317,8 @@ export class APIOrders extends APIBaseChild {
     });
   }
 
-  public getSelfOrders(agentID: number, page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
-    let uri = `/orders/self?agent_id=${agentID}`;
+  public getSelfOrders(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
+    let uri = `/orders/self`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
     }
