@@ -35,6 +35,11 @@ export interface Filters {
   recurrent_client: boolean;
   scheduled_calls: boolean;
   client_login: boolean;
+  expired_slip_bank: boolean;
+  payment_method: string;
+  payment_delay: string;
+  expired_medication: string;
+  medication_out_of_stock: string;
 }
 
 /*
@@ -258,13 +263,7 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoachAgentOrders(
-    agentID: number,
-    page?: number | string,
-    sortBy?: SortBy,
-    search?: Search,
-    filters?: Filters,
-  ) {
+  public getLatestCoachAgentOrders(agentID: number,page?: number | string,sortBy?: SortBy,search?: Search, filters?: Filters) {
     let uri = `/orders/coach/last/${agentID}`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
@@ -298,6 +297,69 @@ export class APIOrders extends APIBaseChild {
       }
       if (filters.created_date !== '') {
         uri = uri + `&created_date=${filters.created_date}`;
+      }
+    }
+
+    return new Promise<APIResponse<GetLatestResp>>(resolve => {
+      this.getJSON(uri)
+        .catch(error => {
+          resolve(APIBaseChild.parseError<GetLatestResp>(error));
+        })
+        .then(v => {
+          resolve(APIBaseChild.parseResponse(v as AxiosResponse<GetLatestResp>));
+        });
+    });
+  }
+
+  public getSelfOrders(agentID: number, page?: number|string, sortBy?: SortBy,search?:Search,filters?:Filters) {
+    let uri = `/orders/self?agent_id${agentID}`;
+    if (page && page > 0) {
+      uri = uri + `?p=${page}`;
+    }
+    if (sortBy) {
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+    }
+
+    if (search) {
+      uri = uri + `&ctx=${search.col}&q=${search.val}`;
+    }
+
+    if (filters) {
+      if (filters.value.min !== '') {
+        uri = uri + `&min=${filters.value.min}`;
+      }
+      if (filters.value.max !== '') {
+        uri = uri + `&max=${filters.value.max}`;
+      }
+      if (filters.client_login) {
+        uri = uri + `&client_login=${filters.client_login}`;
+      }
+      if (filters.recurrent_client) {
+        uri = uri + `&recurrent_client=${filters.recurrent_client}`;
+      }
+      if (filters.scheduled_calls) {
+        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`;
+      }
+      if (filters.calls !== '') {
+        uri = uri + `&calls=${filters.calls}`;
+      }
+      if (filters.created_date !== '') {
+        uri = uri + `&created_date=${filters.created_date}`;
+      }
+      if (filters.expired_slip_bank) {
+        uri = uri + `&expired_banl_slip=${filters.expired_slip_bank}`;
+      }
+      if (filters.payment_method !== '') {
+        uri = uri + `&payment_method=${filters.payment_method}`;
+      }
+      if (filters.payment_delay !== '') {
+        uri = uri + `&payment_delay=${filters.payment_delay}`;
+      }
+      if (filters.expired_medication !== '') {
+        uri = uri + `&expired_medication=${filters.expired_medication}`;
+      }
+      if (filters.medication_out_of_stock !== '') {
+        uri = uri + `&medication_out_of_stock=${filters.medication_out_of_stock}`;
       }
     }
 

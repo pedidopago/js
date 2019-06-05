@@ -28,4 +28,5 @@ export interface OrderAdmrow {
   agent_last_msg_title?: string;
   agent_last_msg_body?: string;
   client_last_msg?: string;
+  date_approved?:string
 }
