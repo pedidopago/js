@@ -30,4 +30,6 @@ export interface OrderAdmrow {
   client_last_msg?: string;
   date_approved?: string;
   bank_slip_expired_date?: string;
+  selected_formula_freq?: number;
+  selected_is_continuous?: number
 }
