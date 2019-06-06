@@ -29,5 +29,5 @@ export interface OrderAdmrow {
   agent_last_msg_body?: string;
   client_last_msg?: string;
   date_approved?: string;
-  bank_slip_expired_date?: string
+  bank_slip_expired_date?: string;
 }
