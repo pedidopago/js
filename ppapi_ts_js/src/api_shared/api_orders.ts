@@ -353,7 +353,7 @@ export class APIOrders extends APIBaseChild {
         uri = uri + `&created_date=${filters.created_date}`;
       }
       if (filters.expired_slip_bank) {
-        uri = uri + `&expired_banl_slip=${filters.expired_slip_bank}`;
+        uri = uri + `&expired_bank_slip=${filters.expired_slip_bank}`;
       }
       if (filters.payment_method !== '') {
         uri = uri + `&payment_method=${filters.payment_method}`;
