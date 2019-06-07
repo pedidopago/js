@@ -33,4 +33,5 @@ export interface OrderAdmrow {
   date_shipping?: string;
   selected_formula_freq?: number;
   selected_is_continuous?: number;
+  remaining_day?: number;
 }
