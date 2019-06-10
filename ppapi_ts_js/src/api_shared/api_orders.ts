@@ -40,6 +40,9 @@ export interface Filters {
   payment_delay: string;
   expired_medication: string;
   medication_out_of_stock: string;
+  get_prescription: string;
+  store_withdrawal:string;
+  repurchase_date:string;
 }
 
 /*
@@ -432,6 +435,53 @@ export class APIOrders extends APIBaseChild {
       }
     }
 
+    return new Promise<APIResponse<GetLatestResp>>(resolve => {
+      this.getJSON(uri)
+        .catch(error => {
+          resolve(APIBaseChild.parseError<GetLatestResp>(error));
+        })
+        .then(v => {
+          resolve(APIBaseChild.parseResponse(v as AxiosResponse<GetLatestResp>));
+        });
+    });
+  }
+
+  public getRepurchase(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
+    let uri = `/orders/repurchase`;
+    if (page && page > 0) {
+      uri = uri + `?p=${page}`;
+    }
+    if (sortBy) {
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+    }
+
+    if (search) {
+      uri = uri + `&ctx=${search.col}&q=${search.val}`;
+    }
+
+    if (filters) {
+      if (filters.value.min !== '') {
+        uri = uri + `&min=${filters.value.min}`;
+      }
+      if (filters.value.max !== '') {
+        uri = uri + `&max=${filters.value.max}`;
+      }
+      if (filters.client_login) {
+        uri = uri + `&client_login=${filters.client_login}`;
+      }
+      if (filters.scheduled_calls) {
+        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`;
+      }
+      if (filters.get_prescription !== '') {
+        uri = uri + `&get_prescription=${filters.get_prescription}`;
+      }
+      if (filters.store_withdrawal !== '') {
+        uri = uri + `&store_withdrawal=${filters.store_withdrawal}`;
+      }
+      if (filters.repurchase_date !== '') {
+        uri = uri + `&repurchase_date=${filters.repurchase_date}`;
+      }
+    }
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
       this.getJSON(uri)
         .catch(error => {

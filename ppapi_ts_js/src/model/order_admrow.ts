@@ -34,4 +34,7 @@ export interface OrderAdmrow {
   selected_formula_freq?: number;
   selected_is_continuous?: number;
   remaining_day?: number;
+  shipping_user_address?: string;
+	date_repurchase?: string;
+	is_repurchase?: number;
 }
