@@ -35,6 +35,10 @@ export interface OrderAdmrow {
   selected_is_continuous?: number;
   remaining_day?: number;
   shipping_user_address?: string;
-	date_repurchase?: string;
-	is_repurchase?: number;
+  date_repurchase?: string;
+  is_repurchase?: number;
+  has_controlled_substances?: number
+  has_refrigerated_substances?: number
+  is_priority?: number
+  is_from_browse?: number
 }

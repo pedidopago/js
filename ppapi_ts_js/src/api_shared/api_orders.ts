@@ -41,8 +41,8 @@ export interface Filters {
   expired_medication: string;
   medication_out_of_stock: string;
   get_prescription: string;
-  store_withdrawal:string;
-  repurchase_date:string;
+  store_withdrawal: string;
+  repurchase_date: string;
 }
 
 /*
