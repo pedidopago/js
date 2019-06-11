@@ -37,8 +37,8 @@ export interface OrderAdmrow {
   shipping_user_address?: string;
   date_repurchase?: string;
   is_repurchase?: number;
-  has_controlled_substances?: number
-  has_refrigerated_substances?: number
-  is_priority?: number
-  is_from_browse?: number
+  has_controlled_substances?: number;
+  has_refrigerated_substances?: number;
+  is_priority?: number;
+  is_from_browse?: number;
 }
