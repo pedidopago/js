@@ -187,7 +187,7 @@ export class APIOrder extends APIBaseChild {
 
   public setDateRepurchase(orderID: number) {
     return new Promise<APIResponse<SuccessResp>>(resolve => {
-      this.getJSON(`/order/${orderID}/repurchase`)
+      this.getJSON(`/order/${orderID}/date-repurchase`)
         .catch(error => {
           resolve(APIBaseChild.parseError<SuccessResp>(error));
         })
