@@ -208,6 +208,19 @@ export class APIOrder extends APIBaseChild {
         });
     });
   }
+
+  public setRepurchaseStepsDone(orderID: number) {
+    return new Promise<APIResponse<SuccessResp>>(resolve => {
+      this.getJSON(`/order/${orderID}/repurchase-setps-done`)
+        .catch(error => {
+          resolve(APIBaseChild.parseError<SuccessResp>(error));
+        })
+        .then(v => {
+          resolve(APIBaseChild.parseResponse(v as AxiosResponse<SuccessResp>));
+        });
+    });
+  }
+
   public saveFormulaObs(orderID: number, formulaID: number, obs: string) {
     return new Promise<APIResponse<SuccessResp>>(resolve => {
       this.postJSON(
