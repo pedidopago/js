@@ -41,4 +41,5 @@ export interface OrderAdmrow {
   has_refrigerated_substances?: number;
   is_priority?: number;
   is_from_browse?: number;
+  date_payment_selected?: string;
 }
