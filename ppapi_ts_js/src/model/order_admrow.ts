@@ -44,4 +44,6 @@ export interface OrderAdmrow {
   date_payment_selected?: string;
   prescriptor_name?: string;
   profession?: number;
+  brcode?: string;
+	uf_profession?: string;
 }
