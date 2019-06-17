@@ -43,4 +43,5 @@ export interface OrderAdmrow {
   is_from_browse?: number;
   date_payment_selected?: string;
   prescriptor_name?: string;
+  profession?: number;
 }
