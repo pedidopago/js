@@ -42,4 +42,5 @@ export interface OrderAdmrow {
   is_priority?: number;
   is_from_browse?: number;
   date_payment_selected?: string;
+  prescriptor_name?: string;
 }
