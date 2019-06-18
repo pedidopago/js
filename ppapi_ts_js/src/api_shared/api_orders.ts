@@ -14,7 +14,10 @@ export interface GetLatestResp {
   sort_by: SortBy;
   search: Search;
 }
-
+export interface Agents {
+  id: number;
+  name: string;
+}
 export interface SortBy {
   key: string;
   asc: string;
@@ -266,13 +269,7 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoachAgentOrders(
-    agentID: number,
-    page?: number | string,
-    sortBy?: SortBy,
-    search?: Search,
-    filters?: Filters,
-  ) {
+  public getLatestCoachAgentOrders(agentID: number,page?: number | string,sortBy?: SortBy,search?: Search,filters?: Filters) {
     let uri = `/orders/coach/last/${agentID}`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
@@ -319,7 +316,6 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-
   public getNoPaymentsOrders(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
     let uri = `/orders/no-payment`;
     if (page && page > 0) {
@@ -382,7 +378,6 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-
   public getContinuousUseOrders(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
     let uri = `/orders/continuous-use`;
     if (page && page > 0) {
@@ -445,7 +440,6 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-
   public getRepurchase(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
     let uri = `/orders/repurchase`;
     if (page && page > 0) {
@@ -489,6 +483,18 @@ export class APIOrders extends APIBaseChild {
         })
         .then(v => {
           resolve(APIBaseChild.parseResponse(v as AxiosResponse<GetLatestResp>));
+        });
+    });
+  }
+  public getAllAgents() {
+    let uri = `/coach/all-agents`;
+    return new Promise<APIResponse<Agents>>(resolve => {
+      this.getJSON(uri)
+        .catch(error => {
+          resolve(APIBaseChild.parseError<Agents>(error));
+        })
+        .then(v => {
+          resolve(APIBaseChild.parseResponse(v as AxiosResponse<Agents>));
         });
     });
   }

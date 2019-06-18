@@ -45,5 +45,5 @@ export interface OrderAdmrow {
   prescriptor_name?: string;
   profession?: number;
   brcode?: string;
-	uf_profession?: string;
+  uf_profession?: string;
 }
