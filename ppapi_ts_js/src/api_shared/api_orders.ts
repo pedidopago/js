@@ -269,7 +269,13 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestCoachAgentOrders(agentID: number,page?: number | string,sortBy?: SortBy,search?: Search,filters?: Filters) {
+  public getLatestCoachAgentOrders(
+    agentID: number,
+    page?: number | string,
+    sortBy?: SortBy,
+    search?: Search,
+    filters?: Filters,
+  ) {
     let uri = `/orders/coach/last/${agentID}`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
@@ -487,7 +493,7 @@ export class APIOrders extends APIBaseChild {
     });
   }
   public getAllAgents() {
-    const uri = `/coach/all-agents`;
+    const uri = `/orders/coach/all-agents`;
     return new Promise<APIResponse<Agents>>(resolve => {
       this.getJSON(uri)
         .catch(error => {
