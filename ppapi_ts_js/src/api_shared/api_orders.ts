@@ -487,7 +487,7 @@ export class APIOrders extends APIBaseChild {
     });
   }
   public getAllAgents() {
-    let uri = `/coach/all-agents`;
+    const uri = `/coach/all-agents`;
     return new Promise<APIResponse<Agents>>(resolve => {
       this.getJSON(uri)
         .catch(error => {
