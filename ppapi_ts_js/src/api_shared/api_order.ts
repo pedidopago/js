@@ -239,4 +239,15 @@ export class APIOrder extends APIBaseChild {
         });
     });
   }
+  public setAgent(orderID: number, agentId: number){
+    return new Promise<APIResponse<SuccessResp>>(resolve => {
+      this.getJSON(`/order/${orderID}/set-agent/${agentId}`)
+        .catch(error => {
+          resolve(APIBaseChild.parseError<SuccessResp>(error));
+        })
+        .then(v => {
+          resolve(APIBaseChild.parseResponse(v as AxiosResponse<SuccessResp>));
+        });
+    });
+  }
 }
