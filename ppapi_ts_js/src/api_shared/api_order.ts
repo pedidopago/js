@@ -184,7 +184,6 @@ export class APIOrder extends APIBaseChild {
         });
     });
   }
-
   public setDateRepurchase(orderID: number) {
     return new Promise<APIResponse<SuccessResp>>(resolve => {
       this.getJSON(`/order/${orderID}/date-repurchase`)
@@ -196,7 +195,6 @@ export class APIOrder extends APIBaseChild {
         });
     });
   }
-
   public setIsRepurchase(orderID: number) {
     return new Promise<APIResponse<SuccessResp>>(resolve => {
       this.getJSON(`/order/${orderID}/is-repurchase`)
@@ -208,7 +206,6 @@ export class APIOrder extends APIBaseChild {
         });
     });
   }
-
   public setRepurchaseStepsDone(orderID: number) {
     return new Promise<APIResponse<SuccessResp>>(resolve => {
       this.getJSON(`/order/${orderID}/repurchase-setps-done`)
@@ -220,7 +217,6 @@ export class APIOrder extends APIBaseChild {
         });
     });
   }
-
   public saveFormulaObs(orderID: number, formulaID: number, obs: string) {
     return new Promise<APIResponse<SuccessResp>>(resolve => {
       this.postJSON(
@@ -239,7 +235,7 @@ export class APIOrder extends APIBaseChild {
         });
     });
   }
-  public setAgent(orderID: number, agentId: number){
+  public setAgent(orderID: number, agentId: number) {
     return new Promise<APIResponse<SuccessResp>>(resolve => {
       this.getJSON(`/order/${orderID}/set-agent/${agentId}`)
         .catch(error => {
@@ -248,6 +244,18 @@ export class APIOrder extends APIBaseChild {
         .then(v => {
           resolve(APIBaseChild.parseResponse(v as AxiosResponse<SuccessResp>));
         });
+    });
+  }
+
+  public setOrderCancel(orderID: number) {
+    return new Promise<APIResponse<SuccessResp>>(resolve => {
+      this.getJSON(`/order/${orderID}/cancel`)
+      .catch(error => {
+        resolve(APIBaseChild.parseError<SuccessResp>(error));
+      })
+      .then(v =>{
+        resolve(APIBaseChild.parseResponse(v as AxiosResponse<SuccessResp>));
+      });
     });
   }
 }
