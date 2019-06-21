@@ -250,12 +250,12 @@ export class APIOrder extends APIBaseChild {
   public setOrderCancel(orderID: number) {
     return new Promise<APIResponse<SuccessResp>>(resolve => {
       this.getJSON(`/order/${orderID}/cancel`)
-      .catch(error => {
-        resolve(APIBaseChild.parseError<SuccessResp>(error));
-      })
-      .then(v =>{
-        resolve(APIBaseChild.parseResponse(v as AxiosResponse<SuccessResp>));
-      });
+        .catch(error => {
+          resolve(APIBaseChild.parseError<SuccessResp>(error));
+        })
+        .then(v => {
+          resolve(APIBaseChild.parseResponse(v as AxiosResponse<SuccessResp>));
+        });
     });
   }
 }
