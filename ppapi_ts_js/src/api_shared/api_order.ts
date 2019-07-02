@@ -173,6 +173,17 @@ export class APIOrder extends APIBaseChild {
         });
     });
   }
+  public deleteCall(orderID: number, callID: number) {
+    return new Promise<APIResponse<SuccessResp>>(resolve => {
+      this.getJSON(`/order/${orderID}/delete-call/${callID}`)
+        .catch(error => {
+          resolve(APIBaseChild.parseError<SuccessResp>(error));
+        })
+        .then(v => {
+          resolve(APIBaseChild.parseResponse(v as AxiosResponse<SuccessResp>));
+        });
+    });
+  }
   public setDateClientAccess(orderID: number) {
     return new Promise<APIResponse<SuccessResp>>(resolve => {
       this.getJSON(`/order/${orderID}/client-access`)
