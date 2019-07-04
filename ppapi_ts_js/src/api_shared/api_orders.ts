@@ -384,7 +384,7 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getContinuousUseOrders(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
+  public getContinuousUseOrders(agentId?:number, page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
     let uri = `/orders/continuous-use`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
@@ -434,6 +434,9 @@ export class APIOrders extends APIBaseChild {
       if (filters.medication_out_of_stock !== '') {
         uri = uri + `&medication_out_of_stock=${filters.medication_out_of_stock}`;
       }
+    }
+    if (agentId) {
+      uri = uri + `&agent_id=${agentId}`;
     }
 
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
