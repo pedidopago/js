@@ -322,7 +322,7 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getNoPaymentsOrders(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
+  public getNoPaymentsOrders(agentId?: number, page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
     let uri = `/orders/no-payment`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
@@ -374,6 +374,10 @@ export class APIOrders extends APIBaseChild {
       }
     }
 
+    if (agentId) {
+      uri = uri + `&agent_id=${agentId}`;
+    }
+
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
       this.getJSON(uri)
         .catch(error => {
@@ -384,7 +388,71 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getContinuousUseOrders(agentId?:number, page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
+
+  public getNoPaymentsOrdersAgents(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
+    let uri = `/orders/no-payment/agents`;
+    if (page && page > 0) {
+      uri = uri + `?p=${page}`;
+    }
+    if (sortBy) {
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+    }
+
+    if (search) {
+      uri = uri + `&ctx=${search.col}&q=${search.val}`;
+    }
+
+    if (filters) {
+      if (filters.value.min !== '') {
+        uri = uri + `&min=${filters.value.min}`;
+      }
+      if (filters.value.max !== '') {
+        uri = uri + `&max=${filters.value.max}`;
+      }
+      if (filters.client_login) {
+        uri = uri + `&client_login=${filters.client_login}`;
+      }
+      if (filters.recurrent_client) {
+        uri = uri + `&recurrent_client=${filters.recurrent_client}`;
+      }
+      if (filters.scheduled_calls) {
+        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`;
+      }
+      if (filters.calls !== '') {
+        uri = uri + `&calls=${filters.calls}`;
+      }
+      if (filters.created_date !== '') {
+        uri = uri + `&created_date=${filters.created_date}`;
+      }
+      if (filters.expired_slip_bank) {
+        uri = uri + `&expired_bank_slip=${filters.expired_slip_bank}`;
+      }
+      if (filters.payment_method !== '') {
+        uri = uri + `&payment_method=${filters.payment_method}`;
+      }
+      if (filters.payment_delay !== '') {
+        uri = uri + `&payment_delay=${filters.payment_delay}`;
+      }
+    }
+
+    return new Promise<APIResponse<CoachAgentStat>>(resolve => {
+      this.getJSON(uri)
+        .catch(error => {
+          resolve(APIBaseChild.parseError<CoachAgentStat>(error));
+        })
+        .then(v => {
+          resolve(APIBaseChild.parseResponse(v as AxiosResponse<CoachAgentStat>));
+        });
+    });
+  }
+
+  public getContinuousUseOrders(
+    agentId?: number,
+    page?: number | string,
+    sortBy?: SortBy,
+    search?: Search,
+    filters?: Filters,
+  ) {
     let uri = `/orders/continuous-use`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
@@ -449,7 +517,62 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getRepurchase(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
+
+  public getContinuousUseOrdersAgents(page?: number | string,sortBy?: SortBy,search?: Search,filters?: Filters) {
+    let uri = `/orders/continuous-use/agents`;
+    if (page && page > 0) {
+      uri = uri + `?p=${page}`;
+    }
+    if (sortBy) {
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+    }
+
+    if (search) {
+      uri = uri + `&ctx=${search.col}&q=${search.val}`;
+    }
+
+    if (filters) {
+      if (filters.value.min !== '') {
+        uri = uri + `&min=${filters.value.min}`;
+      }
+      if (filters.value.max !== '') {
+        uri = uri + `&max=${filters.value.max}`;
+      }
+      if (filters.client_login) {
+        uri = uri + `&client_login=${filters.client_login}`;
+      }
+      if (filters.recurrent_client) {
+        uri = uri + `&recurrent_client=${filters.recurrent_client}`;
+      }
+      if (filters.scheduled_calls) {
+        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`;
+      }
+      if (filters.calls !== '') {
+        uri = uri + `&calls=${filters.calls}`;
+      }
+      if (filters.created_date !== '') {
+        uri = uri + `&created_date=${filters.created_date}`;
+      }
+      if (filters.expired_medication !== '') {
+        uri = uri + `&expired_medication=${filters.expired_medication}`;
+      }
+      if (filters.medication_out_of_stock !== '') {
+        uri = uri + `&medication_out_of_stock=${filters.medication_out_of_stock}`;
+      }
+    }
+
+    return new Promise<APIResponse<CoachAgentStat>>(resolve => {
+      this.getJSON(uri)
+        .catch(error => {
+          resolve(APIBaseChild.parseError<CoachAgentStat>(error));
+        })
+        .then(v => {
+          resolve(APIBaseChild.parseResponse(v as AxiosResponse<CoachAgentStat>));
+        });
+    });
+  }
+
+  public getRepurchase(agentId?: number,page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
     let uri = `/orders/repurchase`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
@@ -485,6 +608,12 @@ export class APIOrders extends APIBaseChild {
         uri = uri + `&repurchase_date=${filters.repurchase_date}`;
       }
     }
+
+
+    if (agentId) {
+      uri = uri + `&agent_id=${agentId}`;
+    }
+
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
       this.getJSON(uri)
         .catch(error => {
@@ -495,6 +624,55 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
+
+  public getRepurchaseAgents(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
+    let uri = `/orders/repurchase/agents`;
+    if (page && page > 0) {
+      uri = uri + `?p=${page}`;
+    }
+    if (sortBy) {
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+    }
+
+    if (search) {
+      uri = uri + `&ctx=${search.col}&q=${search.val}`;
+    }
+
+    if (filters) {
+      if (filters.value.min !== '') {
+        uri = uri + `&min=${filters.value.min}`;
+      }
+      if (filters.value.max !== '') {
+        uri = uri + `&max=${filters.value.max}`;
+      }
+      if (filters.client_login) {
+        uri = uri + `&client_login=${filters.client_login}`;
+      }
+      if (filters.scheduled_calls) {
+        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`;
+      }
+      if (filters.get_prescription !== '') {
+        uri = uri + `&get_prescription=${filters.get_prescription}`;
+      }
+      if (filters.store_withdrawal !== '') {
+        uri = uri + `&store_withdrawal=${filters.store_withdrawal}`;
+      }
+      if (filters.repurchase_date !== '') {
+        uri = uri + `&repurchase_date=${filters.repurchase_date}`;
+      }
+    }
+
+    return new Promise<APIResponse<CoachAgentStat>>(resolve => {
+      this.getJSON(uri)
+        .catch(error => {
+          resolve(APIBaseChild.parseError<CoachAgentStat>(error));
+        })
+        .then(v => {
+          resolve(APIBaseChild.parseResponse(v as AxiosResponse<CoachAgentStat>));
+        });
+    });
+  }
+
   public getAllAgents() {
     const uri = `/orders/coach/all-agents`;
     return new Promise<APIResponse<Agents>>(resolve => {
