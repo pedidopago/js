@@ -79,7 +79,7 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `?p=${page}`;
     }
     if (sortBy && uri.indexOf('p') > -1) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc}`;
     }
 
     if (search) {
@@ -127,7 +127,7 @@ export class APIOrders extends APIBaseChild {
     }
 
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc}`;
     }
 
     if (search) {
@@ -172,7 +172,7 @@ export class APIOrders extends APIBaseChild {
     let uri = `/orders/latest?selfcoach=1&favorites=1`;
 
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc}`;
     }
 
     if (search) {
@@ -257,13 +257,19 @@ export class APIOrders extends APIBaseChild {
         });
     });
   }
-  public getLatestActiveCoachAgents(agentId?: number,page?: number | string,sortBy?: SortBy,search?: Search,filters?: Filters) {
+  public getLatestActiveCoachAgents(
+    agentId?: number,
+    page?: number | string,
+    sortBy?: SortBy,
+    search?: Search,
+    filters?: Filters,
+  ) {
     let uri = `/orders/coach/last-agents`;
     if (page && page > 0) {
       uri = uri + `?p=${page}`;
     }
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc}`;
     }
 
     if (search) {
@@ -334,7 +340,7 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `?p=${page}`;
     }
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc}`;
     }
 
     if (search) {
@@ -387,7 +393,7 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `?p=${page}`;
     }
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc}`;
     }
 
     if (search) {
@@ -454,7 +460,7 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `?p=${page}`;
     }
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc}`;
     }
 
     if (search) {
@@ -517,7 +523,7 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `?p=${page}`;
     }
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc}`;
     }
 
     if (search) {
@@ -583,7 +589,7 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `?p=${page}`;
     }
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc}`;
     }
 
     if (search) {
@@ -637,7 +643,7 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `?p=${page}`;
     }
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc}`;
     }
 
     if (search) {
@@ -689,7 +695,7 @@ export class APIOrders extends APIBaseChild {
       uri = uri + `?p=${page}`;
     }
     if (sortBy) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc === '1' ? 1 : 0}`;
+      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc}`;
     }
 
     if (search) {
