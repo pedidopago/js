@@ -39,6 +39,7 @@ export interface Filters {
   scheduled_calls: boolean;
   client_login: boolean;
   expired_slip_bank: boolean;
+  no_agent: boolean;
   payment_method: string;
   payment_delay: string;
   expired_medication: string;
@@ -101,6 +102,9 @@ export class APIOrders extends APIBaseChild {
       }
       if (filters.scheduled_calls) {
         uri = uri + `&scheduled_calls=${filters.scheduled_calls}`;
+      }
+      if (filters.no_agent) {
+        uri = uri + `&no_agent=${filters.no_agent}`;
       }
       if (filters.calls !== '') {
         uri = uri + `&calls=${filters.calls}`;
