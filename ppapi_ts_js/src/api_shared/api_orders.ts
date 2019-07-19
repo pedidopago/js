@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import { CoachAgentStat } from '../model/coachagentstat';
 import { OrderAdmrow } from '../model/order_admrow';
 import { APIResponse } from '../types';
+import { marshalToQuery } from '../util/objects';
 import { APIBase } from './api_base';
 import { APIBaseChild } from './api_base_child';
 
@@ -20,7 +21,24 @@ export interface Agents {
 }
 export interface SortBy {
   key: string;
-  asc: string;
+  asc: string | boolean;
+}
+
+function normalizeSortBy(s?: SortBy): SortBy {
+  if (s === undefined) {
+    return {
+      asc: '',
+      key: '',
+    };
+  }
+  const ret = {
+    asc: '0',
+    key: s.key,
+  };
+  if (s.asc === true || s.asc === '1' || s.asc === 'true') {
+    ret.asc = '1';
+  }
+  return ret;
 }
 
 export interface Search {
@@ -35,11 +53,11 @@ export interface Filters {
   };
   created_date: string;
   calls: string;
-  recurrent_client: boolean;
-  scheduled_calls: boolean;
-  client_login: boolean;
-  expired_slip_bank: boolean;
-  no_agent: boolean;
+  recurrent_client?: boolean;
+  scheduled_calls?: boolean;
+  client_login?: boolean;
+  expired_slip_bank?: boolean;
+  no_agent?: boolean;
   payment_method: string;
   payment_delay: string;
   expired_medication: string;
@@ -47,14 +65,9 @@ export interface Filters {
   get_prescription: string;
   store_withdrawal: string;
   repurchase_date: string;
+  tab: string;
 }
 
-/*
-OrderID   int                `db:"order_id" json:"order_id"`
-	DisplayID string             `db:"display_id" json:"display_id"`
-	Customer  string             `db:"customer" json:"customer"`
-	Status    orderstatus.Status `db:"status" json:"status"`
-	CreatedAt time.Time          `db:"created_at" json:"created_at"`*/
 export interface OrderFavRow {
   order_id: number;
   display_id: string;
@@ -75,44 +88,24 @@ export class APIOrders extends APIBaseChild {
     super(parent);
   }
   public getLatest(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
+    sortBy = normalizeSortBy(sortBy);
     let uri = `/orders/latest`;
-    if (page && page > 0) {
-      uri = uri + `?p=${page}`;
-    }
-    if (sortBy && uri.indexOf('p') > -1) {
-      uri = uri + `&s=${sortBy.key}&a=${sortBy.asc}`;
-    }
-
-    if (search) {
-      uri = uri + `&ctx=${search.col}&q=${search.val}`;
-    }
-
+    let qparams = { version: 2 };
     if (filters) {
-      if (filters.value.min !== '') {
-        uri = uri + `&min=${filters.value.min}`;
-      }
-      if (filters.value.max !== '') {
-        uri = uri + `&max=${filters.value.max}`;
-      }
-      if (filters.client_login) {
-        uri = uri + `&client_login=${filters.client_login}`;
-      }
-      if (filters.recurrent_client) {
-        uri = uri + `&recurrent_client=${filters.recurrent_client}`;
-      }
-      if (filters.scheduled_calls) {
-        uri = uri + `&scheduled_calls=${filters.scheduled_calls}`;
-      }
-      if (filters.no_agent) {
-        uri = uri + `&no_agent=${filters.no_agent}`;
-      }
-      if (filters.calls !== '') {
-        uri = uri + `&calls=${filters.calls}`;
-      }
-      if (filters.created_date !== '') {
-        uri = uri + `&created_date=${filters.created_date}`;
-      }
+      filters.tab = 'latest';
+      qparams = { ...qparams, ...filters };
     }
+    if (search) {
+      qparams = { ...qparams, ...{ q: search } };
+    }
+    if (sortBy) {
+      qparams = { ...qparams, ...{ s: sortBy } };
+    }
+    if (page && page > 0) {
+      qparams = { ...qparams, ...{ p: page } };
+    }
+
+    uri = uri + '?' + marshalToQuery(qparams);
 
     return new Promise<APIResponse<GetLatestResp>>(resolve => {
       this.getJSON(uri)
