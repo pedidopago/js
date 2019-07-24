@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { CoachAgentStat } from '../model/coachagentstat';
+import { FindRequest, FindResult, marshalFindRequest } from '../model/find_orders';
 import { OrderAdmrow } from '../model/order_admrow';
 import { APIResponse } from '../types';
 import { marshalToQuery } from '../util/objects';
@@ -86,6 +87,17 @@ export interface DueOrderCall {
 export class APIOrders extends APIBaseChild {
   constructor(parent: APIBase) {
     super(parent);
+  }
+  public getCalculatedLatest(req: FindRequest): Promise<APIResponse<FindResult>> {
+    return new Promise<APIResponse<FindResult>>(resolve => {
+      this.getJSON(`/orders/calculated/latest?${marshalFindRequest(req)}`)
+        .catch(error => {
+          resolve(APIBaseChild.parseError<FindResult>(error));
+        })
+        .then(v => {
+          resolve(APIBaseChild.parseResponse(v as AxiosResponse<FindResult>));
+        })
+    })
   }
   public getLatest(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
     sortBy = normalizeSortBy(sortBy);
