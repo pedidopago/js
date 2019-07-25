@@ -96,8 +96,8 @@ export class APIOrders extends APIBaseChild {
         })
         .then(v => {
           resolve(APIBaseChild.parseResponse(v as AxiosResponse<FindResult>));
-        })
-    })
+        });
+    });
   }
   public getLatest(page?: number | string, sortBy?: SortBy, search?: Search, filters?: Filters) {
     sortBy = normalizeSortBy(sortBy);
