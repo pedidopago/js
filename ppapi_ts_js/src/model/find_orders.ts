@@ -227,7 +227,7 @@ function marshalSortBy(stream: string, sortby: FindSortBy): string {
 
 function marshalSearch(stream: string, input: FindSearch): string {
     let output = marshalString(stream, 'q.t', input.t);
-    output = marshalString(output, 's.v', input.v);
+    output = marshalString(output, 'q.v', input.v);
     return output;
 }
 
