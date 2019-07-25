@@ -19,6 +19,7 @@ export interface FindSearch {
 export interface FindFilter {
     amount?: AmountFilter;
     created_at?: DateFilter;
+    treatment_expires_at?: DateFilter;
     calls?: CallFilter;
     payment?: PaymentFilter;
     client?: ClientFilter;
@@ -256,6 +257,10 @@ function marshalFilter(stream: string, input: FindFilter): string {
     if (input.created_at !== undefined) {
         output = marshalString(output, 'f.created_at.from', input.created_at.from);
         output = marshalString(output, 'f.created_at.to', input.created_at.to);
+    }
+    if (input.treatment_expires_at !== undefined) {
+        output = marshalString(output, 'f.treatment_expires_at.from', input.treatment_expires_at.from);
+        output = marshalString(output, 'f.treatment_expires_at.to', input.treatment_expires_at.to);
     }
     if (input.calls !== undefined) {
         if (input.calls.scheduled !== undefined) {
