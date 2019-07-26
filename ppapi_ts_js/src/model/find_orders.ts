@@ -24,6 +24,8 @@ export interface FindFilter {
     payment?: PaymentFilter;
     client?: ClientFilter;
     status?: IntRangeFilter;
+    venue_id?: number;
+    coach_id?: number;
 }
 
 export interface AmountFilter {
@@ -292,6 +294,12 @@ function marshalFilter(stream: string, input: FindFilter): string {
     if (input.status !== undefined) {
         output = marshalInt(output, 'f.status.from', input.status.from);
         output = marshalInt(output, 'f.status.to', input.status.to);
+    }
+    if (input.venue_id !== undefined) {
+        output = marshalInt(output, 'f.venue_id', input.venue_id);
+    }
+    if (input.coach_id !== undefined) {
+        output = marshalInt(output, 'f.coach_id', input.coach_id);
     }
     return output;
 }
