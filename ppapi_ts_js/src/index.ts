@@ -5,7 +5,7 @@ import { API as DomainAPI } from './api_domain/index';
 export default {
   agent: (baseurl: string = '', jwt: string = '') => {
     if (jwt === '') {
-      return AgentAPI.newFromCookie(baseurl, AgentAPI.getCookieNameFromEnv(), '/v1/agt', true);
+      return AgentAPI.newFromCookie(baseurl, AgentAPI.getCookieNameFromEnv());
     }
 
     return new AgentAPI(baseurl, jwt);
