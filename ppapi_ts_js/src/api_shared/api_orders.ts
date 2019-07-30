@@ -88,6 +88,17 @@ export class APIOrders extends APIBaseChild {
     constructor(parent: APIBase) {
         super(parent);
     }
+    public find(req: FindRequest): Promise<APIResponse<FindResult>> {
+        return new Promise<APIResponse<FindResult>>(resolve => {
+            this.getJSON(`/orders/find?${marshalFindRequest(req)}`)
+                .catch(error => {
+                    resolve(APIBaseChild.parseError<FindResult>(error));
+                })
+                .then(v => {
+                    resolve(APIBaseChild.parseResponse(v as AxiosResponse<FindResult>));
+                });
+        });
+    }
     public getCalculatedLatest(req: FindRequest): Promise<APIResponse<FindResult>> {
         return new Promise<APIResponse<FindResult>>(resolve => {
             this.getJSON(`/orders/calculated/latest?${marshalFindRequest(req)}`)
