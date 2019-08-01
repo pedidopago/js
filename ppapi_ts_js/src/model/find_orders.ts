@@ -21,6 +21,7 @@ export interface FindFilter {
     created_at?: DateFilter;
     treatment_expires_at?: DateFilter;
     continuous_treatment?: boolean;
+    repurchase?: RepurchaseFilter;
     calls?: CallFilter;
     payment?: PaymentFilter;
     client?: ClientFilter;
@@ -55,6 +56,12 @@ export interface PaymentFilter {
     statuses?: number[];
     delay?: DateFilter;
     expired_bank_slip?: boolean;
+}
+
+export interface RepurchaseFilter {
+    is_marked?: boolean;
+    marked_date?: DateFilter;
+    steps_completed?: boolean;
 }
 
 export interface ClientFilter {
@@ -267,6 +274,18 @@ function marshalFilter(stream: string, input: FindFilter): string {
     }
     if (input.continuous_treatment !== undefined) {
         output = marshalBool(output, 'f.continuous_treatment', input.continuous_treatment);
+    }
+    if (input.repurchase !== undefined) {
+        if (input.repurchase.is_marked !== undefined) {
+            output = marshalBool(output, 'f.repurchase.is_marked', input.repurchase.is_marked);
+        }
+        if (input.repurchase.marked_date !== undefined) {
+            output = marshalString(output, 'f.repurchase.marked_date.from', input.repurchase.marked_date.from);
+            output = marshalString(output, 'f.repurchase.marked_date.to', input.repurchase.marked_date.to);
+        }
+        if (input.repurchase.steps_completed !== undefined) {
+            output = marshalBool(output, 'f.repurchase.steps_completed', input.repurchase.steps_completed);
+        }
     }
     if (input.calls !== undefined) {
         if (input.calls.scheduled !== undefined) {
