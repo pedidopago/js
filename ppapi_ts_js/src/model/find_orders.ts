@@ -4,6 +4,7 @@ export interface FindRequest {
     q: FindSearch;
     f?: FindFilter;
     limit?: number;
+    scope?: string[];
 }
 
 export interface FindSortBy {
@@ -95,6 +96,20 @@ export interface Row {
     coach: OrderCoach;
     control: OrderControl;
     last_message?: OrderLastMessage;
+    scope?: OrderScopes;
+}
+
+export interface OrderScopes {
+    repurchase?: OrderRepurchase;
+}
+
+export interface OrderRepurchase {
+    order_id: number;
+    order_display_id: string;
+    order_vendor_id: string;
+    order_vendor_subsid: string;
+    status: number;
+    status_name: string;
 }
 
 export interface OrderPayment {
@@ -336,6 +351,12 @@ export function marshalFindRequest(req: FindRequest): string {
         output = marshalFilter(output, req.f);
     }
     output = marshalInt(output, 'limit', req.limit);
+
+    if (req.scope !== undefined) {
+        for (let i = 0; i < req.scope.length; i++) {
+            output = marshalString(output, `scope.${i}`, req.scope[i]);
+        }
+    }
 
     if (output.indexOf('&') === 0) {
         return output.substr(1);
