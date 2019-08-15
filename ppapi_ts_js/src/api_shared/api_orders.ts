@@ -299,9 +299,13 @@ export class APIOrders extends APIBaseChild {
                 });
         });
     }
-    public getNextCalls() {
+    public getNextCalls(expired?: boolean) {
         return new Promise<APIResponse<DueOrderCall[]>>(resolve => {
-            this.getJSON(`/orders/calls?next=1`)
+            let ur = `/orders/calls?next=1`
+            if (expired === true) {
+                ur = `/orders/calls?next=1&expired=1`
+            }
+            this.getJSON(ur)
                 .catch(error => {
                     resolve(APIBaseChild.parseError<DueOrderCall[]>(error));
                 })
