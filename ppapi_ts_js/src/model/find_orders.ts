@@ -29,6 +29,7 @@ export interface FindFilter {
     status?: IntRangeFilter;
     venue_id?: number;
     coach_id?: number;
+    vendor_subsid?: string;
 }
 
 export interface AmountFilter {
@@ -338,6 +339,9 @@ function marshalFilter(stream: string, input: FindFilter): string {
     }
     if (input.coach_id !== undefined) {
         output = marshalInt(output, 'f.coach_id', input.coach_id);
+    }
+    if (input.vendor_subsid !== undefined) {
+        output = marshalString(output, 'f.vendor_subsid', input.vendor_subsid);
     }
     return output;
 }
