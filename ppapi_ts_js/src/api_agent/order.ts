@@ -14,6 +14,11 @@ export interface CompleteRepurchaseInput {
     new_order_id: number;
 }
 
+export interface CancelRepurchaseInput {
+    order_id: number;
+    reason: string;
+}
+
 export class AgentAPIOrder extends APIOrder {
     constructor(parent: APIBase) {
         super(parent);
@@ -43,6 +48,23 @@ export class AgentAPIOrder extends APIOrder {
                 {},
                 {
                     new_order_id: input.new_order_id,
+                },
+            )
+                .catch(error => {
+                    resolve(APIBaseChild.parseError<{}>(error));
+                })
+                .then(v => {
+                    resolve(APIBaseChild.parseResponse(v as AxiosResponse<{}>));
+                });
+        });
+    }
+    public cancelRepurchase(input: CancelRepurchaseInput): Promise<APIResponse<{}>> {
+        return new Promise<APIResponse<{}>>(resolve => {
+            this.postJSON(
+                `/order/${input.order_id}/repurchase/cancel`,
+                {},
+                {
+                    reason: input.reason,
                 },
             )
                 .catch(error => {
