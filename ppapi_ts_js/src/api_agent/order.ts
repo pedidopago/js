@@ -19,6 +19,10 @@ export interface CancelRepurchaseInput {
     reason: string;
 }
 
+export interface GetGUIDOutput {
+    guid: string;
+}
+
 export class AgentAPIOrder extends APIOrder {
     constructor(parent: APIBase) {
         super(parent);
@@ -72,6 +76,20 @@ export class AgentAPIOrder extends APIOrder {
                 })
                 .then(v => {
                     resolve(APIBaseChild.parseResponse(v as AxiosResponse<{}>));
+                });
+        });
+    }
+    public getGUID(order_id: number): Promise<APIResponse<GetGUIDOutput>> {
+        return new Promise<APIResponse<GetGUIDOutput>>(resolve => {
+            this.getJSON(
+                `/order/${order_id}/guid`,
+                {},
+            )
+                .catch(error => {
+                    resolve(APIBaseChild.parseError<GetGUIDOutput>(error));
+                })
+                .then(v => {
+                    resolve(APIBaseChild.parseResponse(v as AxiosResponse<GetGUIDOutput>));
                 });
         });
     }
