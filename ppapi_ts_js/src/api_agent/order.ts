@@ -19,7 +19,7 @@ export interface CancelRepurchaseInput {
     reason: string;
 }
 
-export interface GetGUIDOutput {
+export interface GetGuidOutput {
     guid: string;
 }
 
@@ -79,17 +79,14 @@ export class AgentAPIOrder extends APIOrder {
                 });
         });
     }
-    public getGUID(order_id: number): Promise<APIResponse<GetGUIDOutput>> {
-        return new Promise<APIResponse<GetGUIDOutput>>(resolve => {
-            this.getJSON(
-                `/order/${order_id}/guid`,
-                {},
-            )
+    public getGUID(orderID: number): Promise<APIResponse<GetGuidOutput>> {
+        return new Promise<APIResponse<GetGuidOutput>>(resolve => {
+            this.getJSON(`/order/${orderID}/guid`, {})
                 .catch(error => {
-                    resolve(APIBaseChild.parseError<GetGUIDOutput>(error));
+                    resolve(APIBaseChild.parseError<GetGuidOutput>(error));
                 })
                 .then(v => {
-                    resolve(APIBaseChild.parseResponse(v as AxiosResponse<GetGUIDOutput>));
+                    resolve(APIBaseChild.parseResponse(v as AxiosResponse<GetGuidOutput>));
                 });
         });
     }
