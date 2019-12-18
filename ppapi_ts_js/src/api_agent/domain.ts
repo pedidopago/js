@@ -17,6 +17,39 @@ export class APIDomain extends APIBaseChild {
                 });
         });
     }
+    public getAddresses(): Promise<APIResponse<DomainAddress[]>> {
+        return new Promise<APIResponse<DomainAddress[]>>(resolve => {
+            this.getJSON(`/domain/addresses`)
+                .catch(error => {
+                    resolve(APIBaseChild.parseError<DomainAddress[]>(error));
+                })
+                .then(v => {
+                    resolve(APIBaseChild.parseResponse(v as AxiosResponse<DomainAddress[]>));
+                });
+        });
+    }
+    public getAddress(id: number): Promise<APIResponse<DomainAddress>> {
+        return new Promise<APIResponse<DomainAddress>>(resolve => {
+            this.getJSON(`/domain/address/${id}`)
+                .catch(error => {
+                    resolve(APIBaseChild.parseError<DomainAddress>(error));
+                })
+                .then(v => {
+                    resolve(APIBaseChild.parseResponse(v as AxiosResponse<DomainAddress>));
+                });
+        });
+    }
+    public saveAddress(addr: DomainAddress): Promise<APIResponse<SaveAddressResponse>> {
+        return new Promise<APIResponse<SaveAddressResponse>>(resolve => {
+            this.postJSON(`/domain/address/save`, {}, addr)
+                .catch(error => {
+                    resolve(APIBaseChild.parseError<SaveAddressResponse>(error));
+                })
+                .then(v => {
+                    resolve(APIBaseChild.parseResponse(v as AxiosResponse<SaveAddressResponse>));
+                });
+        });
+    }
 }
 
 export interface VendorSubsid {
@@ -27,4 +60,35 @@ export interface VendorSubsid {
     name: string;
     description: string;
     created: string;
+}
+
+export interface DomainAddress {
+    id: number;
+    title?: string;
+    street: string;
+    number: string;
+    complement?: string;
+    city: string;
+    uf: string;
+    reference?: string;
+    district: string;
+    zip: string;
+    type: number;
+    contact?: DomainAddressContact;
+    obs?: string;
+    enabled: boolean;
+    client_enabled: boolean;
+    venue_id?: number;
+    is_primary: boolean;
+}
+
+export interface DomainAddressContact {
+    name: string;
+    area_code: string;
+    phone: string;
+}
+
+export interface SaveAddressResponse {
+    id: number;
+    new: boolean;
 }
