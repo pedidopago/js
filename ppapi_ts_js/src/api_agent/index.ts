@@ -3,6 +3,7 @@ import util from '../util';
 import { AgentAPIClient } from './client';
 import { APICoaches } from './coaches';
 import { APIDomain } from './domain';
+import { APIMe } from './me';
 import { AgentAPIOrder } from './order';
 export class API extends APIBase {
     public static newFromCookie(baseurl: string = '', cookiename: string = '') {
@@ -14,6 +15,7 @@ export class API extends APIBase {
     public domain: APIDomain;
     public order: AgentAPIOrder;
     public client: AgentAPIClient;
+    public me: APIMe;
 
     constructor(baseurl: string = '', jwt: string = '') {
         super(baseurl, jwt, '/v1/agt', true);
@@ -21,5 +23,6 @@ export class API extends APIBase {
         this.domain = new APIDomain(this);
         this.order = new AgentAPIOrder(this);
         this.client = new AgentAPIClient(this);
+        this.me = new APIMe(this);
     }
 }
