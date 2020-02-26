@@ -20,6 +20,7 @@ export interface FindSearch {
 export interface FindFilter {
     amount?: AmountFilter;
     created_at?: DateFilter;
+    date_cancelled?: DateFilter;
     treatment_expires_at?: DateFilter;
     continuous_treatment?: boolean;
     repurchase?: RepurchaseFilter;
@@ -283,6 +284,10 @@ function marshalFilter(stream: string, input: FindFilter): string {
     if (input.created_at !== undefined) {
         output = marshalString(output, 'f.created_at.from', input.created_at.from);
         output = marshalString(output, 'f.created_at.to', input.created_at.to);
+    }
+    if (input.date_cancelled !== undefined) {
+        output = marshalString(output, 'f.date_cancelled.from', input.date_cancelled.from);
+        output = marshalString(output, 'f.date_cancelled.to', input.date_cancelled.to);
     }
     if (input.treatment_expires_at !== undefined) {
         output = marshalString(output, 'f.treatment_expires_at.from', input.treatment_expires_at.from);
