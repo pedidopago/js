@@ -31,6 +31,7 @@ export interface FindFilter {
     venue_id?: number;
     coach_id?: number;
     vendor_subsid?: string;
+    no_pickup_waybill_vendor_id?: boolean;
 }
 
 export interface AmountFilter {
@@ -295,6 +296,9 @@ function marshalFilter(stream: string, input: FindFilter): string {
     }
     if (input.continuous_treatment !== undefined) {
         output = marshalBool(output, 'f.continuous_treatment', input.continuous_treatment);
+    }
+    if (input.no_pickup_waybill_vendor_id !== undefined) {
+        output = marshalBool(output, 'f.no_pickup_waybill_vendor_id', input.no_pickup_waybill_vendor_id);
     }
     if (input.repurchase !== undefined) {
         if (input.repurchase.is_marked !== undefined) {
