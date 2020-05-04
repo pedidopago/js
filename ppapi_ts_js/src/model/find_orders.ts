@@ -199,6 +199,7 @@ export interface OrderLastMessage {
     internal_agent_title: string;
     internal_agent_body: string;
     client_body: string;
+    date?: string;
 }
 
 export interface ShippingAddress {
