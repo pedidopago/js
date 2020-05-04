@@ -199,6 +199,10 @@ export interface OrderLastMessage {
     internal_agent_title: string;
     internal_agent_body: string;
     client_body: string;
+    client_date: string;
+    agent_body?: string;
+    agent_date?: string;
+    agent_id?: number;
     date?: string;
 }
 
