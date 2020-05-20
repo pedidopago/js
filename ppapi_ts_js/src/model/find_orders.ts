@@ -33,6 +33,7 @@ export interface FindFilter {
     vendor_subsid?: string;
     no_pickup_waybill_vendor_id?: boolean;
     nf?: boolean;
+    has_messages?: boolean;
 }
 
 export interface AmountFilter {
@@ -308,6 +309,9 @@ function marshalFilter(stream: string, input: FindFilter): string {
     }
     if (input.nf !== undefined) {
         output = marshalBool(output, 'f.nf', input.nf);
+    }
+    if (input.has_messages !== undefined) {
+        output = marshalBool(output, 'f.has_messages', input.has_messages);
     }
     if (input.repurchase !== undefined) {
         if (input.repurchase.is_marked !== undefined) {
