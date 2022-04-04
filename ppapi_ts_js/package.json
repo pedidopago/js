@@ -1,6 +1,6 @@
 {
   "name": "@pedidopago/api",
-  "version": "0.2.28",
+  "version": "0.3.0",
   "description": "Pedido Pago Client API (api.pedidopago.com.br)",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -18,16 +18,16 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
-    "jest": "^24.7.1",
+    "jest": "^27.5.1",
     "prettier": "^1.17.0",
-    "ts-jest": "^24.0.2",
+    "ts-jest": "^27.1.4",
     "tslint": "^5.16.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-jest": "^1.0.5",
     "typescript": "^3.4.1"
   },
   "dependencies": {
-    "axios": "^0.19.0"
+    "axios": "^0.26.1"
   },
   "files": [
     "lib/**/*"
