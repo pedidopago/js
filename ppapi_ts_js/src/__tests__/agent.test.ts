@@ -11,9 +11,9 @@ test('agent_order_getVerifyPaymentData', () => {
     let z = x.order.getVerifyPaymentData(151163);
     console.log(z);
     z.then(resp => {
-        console.log('resp:', resp);
-        console.log('type:');
-        console.log(typeof resp);
+        //console.log('resp:', resp);
+        //console.log('type:');
+        //console.log(typeof resp);
         if (!resp.success()) {
             fail(resp.error);
             return;
